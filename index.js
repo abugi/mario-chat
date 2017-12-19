@@ -11,4 +11,8 @@ var server = app.listen(3000, function(){
 app.use(express.static('public'));
 
 //setting up sokcet.io
-io.socket(server);
+const io = socket(server);
+
+io.on('connection', function(){
+  console.log('made connection on a socket');
+});
