@@ -6,3 +6,11 @@ const output = document.querySelector('#output');
 const message = document.querySelector('#message');
 const handle = document.querySelector('#handle');
 const send = document.querySelector('#send');
+
+//Emit Events
+send.addEventListener('click', function(){
+    socket.emit('chat', {
+        message: message.value,
+        handle: handle.value
+    });
+});
