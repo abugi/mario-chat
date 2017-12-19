@@ -14,13 +14,13 @@ app.use(express.static('public'));
 const io = socket(server);
 
 io.on('connection', function(socket){
-  console.log('made connection on a socket');
 
   socket.on('chat', function(data){
     io.sockets.emit('chat', data);
   });
 
   socket.on('typing', function(data){
-    io.broadcast.emit('typing', data);
+    socket.broadcast.emit('typing', data);
   });
+ 
 });

@@ -22,9 +22,14 @@ message.addEventListener('keypress', function(){
 
 //Listen for event from server
 socket.on('chat', function(data){
-    output.innerHTML += '<p><strong>' + data.handle + '</strong>:' + data.message + '</p>';
+    if(data.message && data.message.length > 0){
+        output.innerHTML += '<p><strong>' + data.handle + '</strong>:' + data.message + '</p>';
+    }
+    
     handle.value = '';
     message.value = '';
+    feedback.innerHTML = '';
+    
 });
 
 socket.on('typing', function(data){
