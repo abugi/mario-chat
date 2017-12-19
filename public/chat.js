@@ -18,4 +18,6 @@ send.addEventListener('click', function(){
 //Listen for event from server
 socket.on('chat', function(data){
     output.innerHTML += '<p><strong>' + data.handle + '</strong>:' + data.message + '</p>';
+    handle.value = '';
+    message.value = '';
 });
