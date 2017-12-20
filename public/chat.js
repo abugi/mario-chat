@@ -1,5 +1,5 @@
 //connect socket
-const socket = io.connect('localhost:3000');
+const socket = io.connect();
 
 //DOM Query
 const output = document.querySelector('#output');
