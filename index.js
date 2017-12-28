@@ -10,7 +10,6 @@ var server = app.listen(3000, function(){
   console.log('chat app live on port 3k');
 });
 
-mongoose.connect('mongodb://localhost/test', { useMongoClient: true });
 mongoose.connect('mongodb://localhost/mario_chat', { useMongoClient: true }, function(err){
   if(err){
     console.log(err);
@@ -18,6 +17,14 @@ mongoose.connect('mongodb://localhost/mario_chat', { useMongoClient: true }, fun
     console.log('MongoDB connected...');
   }
 });
+
+const chatSchema = new mongoose.Schema({
+  handle: String,
+  message: String,
+  createdAt: {type: Date, default: Date.now}
+});
+
+const Chat = mongoose.model('Chat', chatSchema);
 
 //serving static files
 app.use(express.static('public'));
