@@ -35,6 +35,13 @@ const io = socket(server);
 io.on('connection', function(socket){
 
   socket.on('chat', function(data){
+    const msg = new Chat(data);
+    msg.save(function(err, saved){
+      if(err){
+        throw err;
+      }
+      console.log(saved);
+    });
     io.sockets.emit('chat', data);
   });
 
