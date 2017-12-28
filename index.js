@@ -33,14 +33,16 @@ app.use(express.static('public'));
 const io = socket(server);
 
 io.on('connection', function(socket){
+  Chat.find({}, function(err, chats){
+    if(err) throw err;
+    io.sockets.emit('recent chats', chats);
+  });
 
   socket.on('chat', function(data){
     const msg = new Chat(data);
-    msg.save(function(err, saved){
-      if(err){
+    msg.save(function(err){
+      if(err)
         throw err;
-      }
-      console.log(saved);
     });
     io.sockets.emit('chat', data);
   });

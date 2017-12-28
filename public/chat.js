@@ -7,6 +7,7 @@ const message = document.querySelector('#message');
 const handle = document.querySelector('#handle');
 const send = document.querySelector('#send');
 const feedback = document.querySelector('#feedback');
+const recent = document.querySelector('#recent');
 
 //Emit Events
 send.addEventListener('click', function(){
@@ -34,4 +35,10 @@ socket.on('chat', function(data){
 
 socket.on('typing', function(data){
     feedback.innerHTML = '<p><em>' + data + ' is typing a message...</em></p>';
+});
+
+socket.on('recent chats', function (chats) {
+    for (var i = 0; i < chats.length; i++){
+        console.log(chats[i].handle)
+    }
 });
