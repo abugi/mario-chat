@@ -33,7 +33,7 @@ app.use(express.static('public'));
 const io = socket(server);
 
 io.on('connection', function(socket){
-  Chat.find({}, function(err, chats){
+  Chat.find({}).sort('-createdAt').limit(7).exec(function(err, chats){
     if(err) throw err;
     io.sockets.emit('recent chats', chats);
   });
@@ -41,8 +41,7 @@ io.on('connection', function(socket){
   socket.on('chat', function(data){
     const msg = new Chat(data);
     msg.save(function(err){
-      if(err)
-        throw err;
+      if(err) throw err;
     });
     io.sockets.emit('chat', data);
   });

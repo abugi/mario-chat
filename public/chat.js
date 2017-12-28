@@ -38,7 +38,7 @@ socket.on('typing', function(data){
 });
 
 socket.on('recent chats', function (chats) {
-    for (var i = 0; i < chats.length; i++){
-        console.log(chats[i].handle)
+    for (var i = chats.length - 1; i >= 0; i--){
+        recent.innerHTML += '<p><strong> ' + chats[i].handle + '</strong>:' + chats[i].message + '</p>'
     }
 });
